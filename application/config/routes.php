@@ -62,5 +62,10 @@ $route['logout'] = 'AuthController/logout';
 $route['makeDB'] = 'DBController/makeDB';
 $route['makeTables'] = 'DBController/makeTables';
 
+
+//ProductController
+
+$route['produkte'] = 'ProductController';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

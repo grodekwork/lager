@@ -17,6 +17,7 @@ class DBController extends CI_Controller{
         $this->load->model('DBConn','dbconn');
 
         $this->load->model('User_Model','user');
+        $this->load->model('Product_Model','product');
 
     }
 
@@ -40,7 +41,7 @@ class DBController extends CI_Controller{
         //create table user
 
         $this->user->makeTable();
-
+        $this->product->makeTable();
 
 
         //-------------------------------------------------------------------

@@ -24,7 +24,7 @@ class MainController extends CI_Controller{
        
 
 
-        $this->isLogged = FALSE;
+        //$this->isLogged = FALSE;
 
         $this->isLogged = $this->session->userdata('isLogged');
 
@@ -54,9 +54,9 @@ class MainController extends CI_Controller{
 
             if(!$this->dbconn->ifTablesExist()){
                 
-                $data['msg'] = "";
+                $data['msg'] = "Alle Tabellen müssen installiert sein! <strong class='warning'>App kann nicht richtig funktionieren!</strong>";
                 $data['link'] = base_url() . "index.php/makeTables";
-                $data['linkAlt'] = "make Tables";
+                $data['linkAlt'] = "instal the Tables";
             
                 $this->load->view("templates/warnings/info",$data);
             }

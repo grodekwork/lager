@@ -18,6 +18,7 @@ class DBConn extends CI_Model{
 
 
         $this->tableNames[] = "user";
+        $this->tableNames[] = "product";
 
 
     }
