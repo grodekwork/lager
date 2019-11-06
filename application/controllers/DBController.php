@@ -18,6 +18,8 @@ class DBController extends CI_Controller{
 
         $this->load->model('User_Model','user');
         $this->load->model('Product_Model','product');
+        $this->load->model('Production_Model','production');
+        $this->load->model('Dismount_Model','dismount');
 
     }
 
@@ -42,6 +44,8 @@ class DBController extends CI_Controller{
 
         $this->user->makeTable();
         $this->product->makeTable();
+        $this->production->makeTable();
+        $this->dismount->makeTable();
 
 
         //-------------------------------------------------------------------

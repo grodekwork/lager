@@ -54,7 +54,7 @@ class MainController extends CI_Controller{
 
             if(!$this->dbconn->ifTablesExist()){
                 
-                $data['msg'] = "Alle Tabellen müssen installiert sein! <strong class='warning'>App kann nicht richtig funktionieren!</strong>";
+                $data['msg'] = "Alle Tabellen müssen installiert sein! App kann nicht richtig funktionieren!";
                 $data['link'] = base_url() . "index.php/makeTables";
                 $data['linkAlt'] = "instal the Tables";
             

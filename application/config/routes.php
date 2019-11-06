@@ -66,6 +66,14 @@ $route['makeTables'] = 'DBController/makeTables';
 //ProductController
 
 $route['produkte'] = 'ProductController';
+$route['produkte/add'] = 'ProductController/addProduct';
+$route['produkte/update/(:num)'] = 'ProductController/updateProduct/$1';
+
+$route['produktion/neue'] = 'ProductController/production';
+
+$route['produktion/abgang'] = 'ProductController/giveAway';
+
+$route['produktion/bericht/(:any)'] = 'ProductController/bericht/$1';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

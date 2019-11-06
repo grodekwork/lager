@@ -8,7 +8,7 @@ class Info extends CI_Model{
     public function __construct(){
         parent::__construct();
 
-        $this->pageTitle = "Lager";
+        $this->pageTitle = "BETA Lager";
     }
 
     public function getPageTitle():String{
