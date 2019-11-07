@@ -75,5 +75,11 @@ $route['produktion/abgang'] = 'ProductController/giveAway';
 
 $route['produktion/bericht/(:any)'] = 'ProductController/bericht/$1';
 
+
+//UploadController
+
+$route['upload'] = 'UploadController/main';
+$route['upload/do_upload'] = 'UploadController/main';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

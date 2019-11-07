@@ -11,9 +11,9 @@
     <p>
         <!-- Button Bar w/icons -->
         <ul class="button-bar">
-        <li><a href="<?php echo base_url()?>index.php/produkte/add"><i class="fa fa-plus-square"></i> Hinzufügen</a></li>
+        <li><a href="<?php echo base_url();?>index.php/produkte/add"><i class="fa fa-plus-square"></i> Hinzufügen</a></li>
         
-        <li><a href=""><i class="fa fa-upload"></i> .xls Hochladen</a></li>
+        <li><a href="<?php echo base_url();?>index.php/upload"><i class="fa fa-upload"></i> .xls Hochladen</a></li>
         
         </ul>
     </p>
