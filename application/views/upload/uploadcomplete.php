@@ -1,4 +1,4 @@
-<div class="grid flex">
+<div class="grid">
     <div class="col_12">
 
     <ul>

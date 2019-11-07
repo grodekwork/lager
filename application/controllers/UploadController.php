@@ -9,6 +9,8 @@ class UploadController extends CI_Controller{
 
         $this->load->model('Info','info');
 
+        $this->load->model('UploadFile_Model','uploadModel');
+
         //libraries
 
         $this->load->library("session");
@@ -28,7 +30,8 @@ class UploadController extends CI_Controller{
 
         //config
                 $config['upload_path']          = './uploads/';
-                $config['allowed_types']        = 'xlsx|xls|jpg|png';
+                $config['allowed_types']        = 'csv';
+                //$config['allowed_types']        = 'csv|xlsx|xls|jpg|png';
                 $config['max_size']             = 100;
                 $config['max_width']            = 1024;
                 $config['max_height']           = 768;
@@ -48,10 +51,22 @@ class UploadController extends CI_Controller{
 
                 $data = array('upload_data' => $this->upload->data());
                 $this->load->view("upload/uploadcomplete",$data);
+               
+                //set only name from array
+
+                $this->uploadModel->setFilename($data['upload_data']['file_name']);
+                
+                //save into database
+
+                $this->uploadModel->save();
 
             }else{
+
                 //error page
                 $data['error'] = $this->upload->display_errors();
+
+                $this->load->view('upload/errormsg',$data);
+
                 $this->load->view("upload/main",$data);
             }
             
@@ -62,6 +77,17 @@ class UploadController extends CI_Controller{
         $this->load->view("templates/footer");
 
 
+    }
+
+    public function raport(){
+        $data['files'] = $this->uploadModel->getAll();
+
+        $data['pageTitle'] = $this->info->getPageTitle() . " - Files Uploaded";
+        
+        $this->load->view("templates/header",$data);
+        $this->load->view("templates/menu");
+        $this->load->view('upload/raport',$data);
+        $this->load->view("templates/footer");
     }
 
 }

@@ -20,6 +20,7 @@ class DBController extends CI_Controller{
         $this->load->model('Product_Model','product');
         $this->load->model('Production_Model','production');
         $this->load->model('Dismount_Model','dismount');
+        $this->load->model('UploadFile_Model','upload');
 
     }
 
@@ -46,6 +47,7 @@ class DBController extends CI_Controller{
         $this->product->makeTable();
         $this->production->makeTable();
         $this->dismount->makeTable();
+        $this->upload->makeTable();
 
 
         //-------------------------------------------------------------------
