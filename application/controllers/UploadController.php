@@ -102,6 +102,7 @@ class UploadController extends CI_Controller{
     }
 
     public function raport(){
+
         $data['files'] = $this->uploadModel->getAll();
 
         $data['pageTitle'] = $this->info->getPageTitle() . " - Files Uploaded";
@@ -111,5 +112,34 @@ class UploadController extends CI_Controller{
         $this->load->view('upload/raport',$data);
         $this->load->view("templates/footer");
     }
+
+    //Function wchich delete File from server and database
+
+    public function deleteFile($fileId){
+
+        $data['pageTitle'] = $this->info->getPageTitle() . " - File delete";
+        $data['fileId'] = $fileId;
+
+        $data['file'] = $this->uploadModel->getOne('id',$fileId);
+
+        if($this->input->post('deleteFile')){
+            
+            $this->uploadModel->setId($this->input->post('fileId'));
+            $this->uploadModel->setFilename($this->input->post('filename'));
+
+            echo "<p>".$this->uploadModel->getId()."</p>";
+
+            echo $url = base_url() . "uploads/".$this->uploadModel->getFilename();
+
+
+        }
+
+        $this->load->view("templates/header",$data);
+        $this->load->view("templates/menu");
+        $this->load->view('upload/delete',$data);
+        $this->load->view("templates/footer");
+
+    }
+
 
 }

@@ -11,6 +11,9 @@ class UploadFile_Model extends CI_Model{
     public function getId(){
         return $this->id;
     }
+    public function setId($value){
+        $this->id = $value;
+    }
     public function setFilename($value){
         $this->filename = $value;
     }
@@ -69,6 +72,13 @@ class UploadFile_Model extends CI_Model{
         $query = $this->db->get();
         
         return $query->result();
+    }
+
+    public function delete(){
+
+        $this->db->where('id',$this->id);
+        $this->db->delete('uploads');
+
     }
 
     public function getOne($feld,$value){
