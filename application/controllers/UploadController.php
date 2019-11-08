@@ -31,7 +31,7 @@ class UploadController extends CI_Controller{
         //config
                 $config['upload_path']          = './uploads/';
                 $config['allowed_types']        = 'csv';
-                //$config['allowed_types']        = 'csv|xlsx|xls|jpg|png';
+                //$config['allowed_types']        = 'csv|xlsx|xls';
                 $config['max_size']             = 100;
                 $config['max_width']            = 1024;
                 $config['max_height']           = 768;
@@ -77,6 +77,28 @@ class UploadController extends CI_Controller{
         $this->load->view("templates/footer");
 
 
+    }
+
+    public function reload($id){
+
+        $data['pageTitle'] = $this->info->getPageTitle() . " - Die Produkte reload";
+
+        $file = $this->uploadModel->getOne('id',$id);
+
+        $filePath = base_url() . "uploads/".$file->filename;
+
+        $this->uploadModel->setFilename($filePath);
+
+        $data['fileId'] = $file->id;
+
+        $data['productsFromFile'] = $this->uploadModel->readCSV();
+
+        
+        
+        $this->load->view("templates/header",$data);
+        $this->load->view("templates/menu");
+        $this->load->view('upload/fileSetup');
+        $this->load->view("templates/footer");
     }
 
     public function raport(){

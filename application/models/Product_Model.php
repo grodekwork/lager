@@ -299,46 +299,7 @@ class Product_Model extends CI_Model{
         }
     }
 
-    public function readCSV(){
 
-        $exportData = array();
-
-        $row = 0;
-
-        if($handle = fopen("cartUpload/" . $this->fileName, "r")){
-
-            while(($data = fgetcsv($handle, 1000, ";"))!==FALSE){
-                
-                $num = count($data);
-
-                //echo "<p>$num Felder in Zeile $row: <br /></p>\n";
-                
-                
-                for($c=0;$c<$num;$c++){
-                    //echo $data[$c] . " ";
-                    if($data[$c]!="#NV"){
-                        $exportData[$row][$c] = $data[$c];
-                    }
-                    
-                }
-
-                $row++;
-                //echo "<br />\n";
-            }
-
-            fclose($handle);
-
-            //echo "<pre>";
-            //print_r($exportData);
-            //echo "</pre>";
-            
-            
-
-            return $exportData;
-
-        }
-        
-    }
 
 
 

@@ -70,4 +70,62 @@ class UploadFile_Model extends CI_Model{
         
         return $query->result();
     }
+
+    public function getOne($feld,$value){
+        $this->db->select('*');
+        $this->db->from('uploads');
+        $this->db->where($feld,$value);
+        $this->db->limit('1');
+        $query = $this->db->get();
+
+        return $query->row();
+    }
+
+    public function readCSV(){
+
+        $exportData = array();
+
+        $row = 0;
+
+        if($handle = fopen($this->filename, "r")){
+
+            while(($data = fgetcsv($handle, 1000, ";"))!==FALSE){
+                
+                $num = count($data);
+
+                //echo "<p>$num Felder in Zeile $row: <br /></p>\n";
+                
+                
+                for($c=0;$c<$num;$c++){
+                    //echo $data[$c] . " ";
+                    if($data[$c]!="#NV"){
+                        $exportData[$row][$c] = $this->convert($data[$c]);
+                    }
+                    
+                }
+
+                $row++;
+                //echo "<br />\n";
+            }
+
+            fclose($handle);
+
+            //echo "<pre>";
+            //print_r($exportData);
+            //echo "</pre>";
+            
+            
+
+            return $exportData;
+
+        }
+        
+    }
+    
+    //Convert into Windows UTF-9
+
+    public function convert( $str ) {
+        return iconv( "Windows-1252", "UTF-8", $str );
+    }
+
 }

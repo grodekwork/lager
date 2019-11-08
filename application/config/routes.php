@@ -81,6 +81,7 @@ $route['produktion/bericht/(:any)'] = 'ProductController/bericht/$1';
 $route['upload'] = 'UploadController/main';
 $route['upload/do_upload'] = 'UploadController/main';
 $route['upload/raport'] = 'UploadController/raport';
+$route['upload/reload/(:num)'] = 'UploadController/reload/$1';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

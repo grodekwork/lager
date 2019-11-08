@@ -15,7 +15,7 @@
             <tr>
             <td><?php echo $file->filename; ?></td>
             <td><?php echo $file->createdAt; ?></td>
-            <td><a href="">Ja - Zurücksetzen</a></td>
+            <td><a href="<?php echo base_url();?>index.php/upload/reload/<?php echo $file->id;?>">Ja - Zurücksetzen</a></td>
             <td><a href="<?php echo base_url();?>uploads/<?php echo $file->filename; ?>">download</a></td>
             </tr>
         <?php
