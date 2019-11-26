@@ -94,7 +94,6 @@ class UploadController extends CI_Controller{
         $data['productsFromFile'] = $this->uploadModel->readCSV();
 
         
-        
         $this->load->view("templates/header",$data);
         $this->load->view("templates/menu");
         $this->load->view('upload/fileSetup');
@@ -127,9 +126,27 @@ class UploadController extends CI_Controller{
             $this->uploadModel->setId($this->input->post('fileId'));
             $this->uploadModel->setFilename($this->input->post('filename'));
 
-            echo "<p>".$this->uploadModel->getId()."</p>";
+            //echo "<p>".$this->uploadModel->getId()."</p>";
 
-            echo $url = base_url() . "uploads/".$this->uploadModel->getFilename();
+            $url = base_url() . "uploads/".$this->uploadModel->getFilename();
+
+            //$newurl =  base_url() . "uploads/temp".$this->uploadModel->getFilename();
+            //copy($url,$newurl)
+            //$newurl =  base_url() . "uploads/temp".$this->uploadModel->getFilename().".tmp";
+            
+            
+            if(unlink($url)){
+                echo "File Deleted.";
+                
+                //delete from Database
+
+                $this->uploadModel->delete();
+            }
+
+            //for testing
+
+            $this->uploadModel->delete();
+            
 
 
         }

@@ -42,6 +42,8 @@ class AuthController extends CI_Controller{
 
                 redirect($url);
 
+            }else{
+                redirect(base_url());
             }
 
            

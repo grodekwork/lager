@@ -132,7 +132,7 @@ class UploadFile_Model extends CI_Model{
         
     }
     
-    //Convert into Windows UTF-9
+    //Convert into Windows UTF-8
 
     public function convert( $str ) {
         return iconv( "Windows-1252", "UTF-8", $str );

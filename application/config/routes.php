@@ -67,6 +67,8 @@ $route['makeTables'] = 'DBController/makeTables';
 
 $route['produkte'] = 'ProductController';
 $route['produkte/add'] = 'ProductController/addProduct';
+$route['produkte/suchen'] = 'ProductController/find';
+
 $route['produkte/update/(:num)'] = 'ProductController/updateProduct/$1';
 
 $route['produktion/neue'] = 'ProductController/production';

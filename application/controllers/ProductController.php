@@ -167,6 +167,35 @@ class ProductController extends CI_Controller{
 
     }
 
+    public function find(){
+
+        if($this->input->post('findProduct')){
+        
+            $findCriterium = $this->input->post('product');
+
+            $data['products'] = $this->product->getAll2($findCriterium); 
+
+            //echo "<pre>";
+            //print_r( $data['results']);
+            //echo "</pre>";
+
+        }
+
+        $data['pageTitle'] = $this->info->getPageTitle() . " - Produktion";
+
+        $this->load->view("templates/header",$data);
+        $this->load->view("templates/menu");
+        $this->load->view('product/findProductForm');
+
+        if(!empty($data['products'])){
+            $this->load->view('product/content',$data);
+        }
+
+        $this->load->view("templates/footer");
+
+
+    }
+
     public function production(){
 
         $data['pageTitle'] = $this->info->getPageTitle() . " - Produktion";

@@ -14,6 +14,7 @@ class Product_Model extends CI_Model{
     protected $amount;          //bestandsmenge
     protected $weight;          //gewicht
     protected $total;           //gesamt
+    protected $status;          //status, for example: check needed
     protected $createdAt;
     protected $updatedAt;
 
@@ -84,6 +85,12 @@ class Product_Model extends CI_Model{
     public function getTotal(){
         return $this->total;
     }
+    public function setStatus($value){
+        $this->status = $value;
+    }
+    public function getStatus(){
+        return $this->status;
+    }
 
 
     public function __construct(){
@@ -102,77 +109,23 @@ class Product_Model extends CI_Model{
 
         if(!$this->db->table_exists('product')){
 
-            $fields = array(
-                'id' => array(
-                    'type' => 'INT',
-                    'constraint' => 5,
-                    'unsigned' => TRUE,
-                    'auto_increment' => TRUE
-                ),
-                'ean' => array(
-                    'type' => 'VARCHAR',
-                    'constraint' => '240',
-                    'null' => FALSE
-                ),
-                'item' => array(
-                    'type' => 'VARCHAR',
-                    'constraint' => '240',
-                    'null' => FALSE
-                ),
-                'origin' => array(
-                    'type' => 'VARCHAR',
-                    'constraint' => '120',
-                    'null' => FALSE,
-                ),
-                'type' => array(
-                    'type' => 'VARCHAR',
-                    'constraint' => '120',
-                    'null' => FALSE,
-                ),
-                'age' => array(
-                    'type' => 'VARCHAR',
-                    'constraint' => '120',
-                    'null' => FALSE
-                ),
-                'package' => array(
-                    'type' => 'VARCHAR',
-                    'constraint' => '120',
-                    'null' => FALSE
-                ),
-                'plan' => array(
-                    'type' => 'VARCHAR',
-                    'constraint' => '120',
-                    'null' => FALSE
-                ),
-                'amount' => array(
-                    'type' => 'FLOAT',
-                    'constraint' => '50',
-                    'null' => FALSE
-                ),
-                'weight' => array(
-                    'type' => 'FLOAT',
-                    'constraint' => '50',
-                    'null' => FALSE
-                ),
-                'total' => array(
-                    'type' => 'FLOAT',
-                    'constraint' => '50',
-                    'null' => FALSE
-                ),
-                'createdAt' => array(
-                    'type' => 'VARCHAR',
-                    'constraint' => '50',
-                    'null' => FALSE
-                ),
-                'updatedAt' => array(
-                    'type' => 'VARCHAR',
-                    'constraint' => '50',
-                    'null' => FALSE
-                )
-            );
+            $this->dbforge->add_field('id INT NOT NULL AUTO_INCREMENT PRIMARY KEY');
+            $this->dbforge->add_field('ean VARCHAR(244) NOT NULL');
+            $this->dbforge->add_field('item VARCHAR(244) NOT NULL');
+            $this->dbforge->add_field('origin VARCHAR(244) NOT NULL');
+            $this->dbforge->add_field('type VARCHAR(120) NOT NULL');
+            $this->dbforge->add_field('age VARCHAR(120) NOT NULL');
+            $this->dbforge->add_field('package VARCHAR(120) NOT NULL');
+            $this->dbforge->add_field('plan VARCHAR(120) NOT NULL');
+            $this->dbforge->add_field('amount FLOAT(50) NOT NULL');
+            $this->dbforge->add_field('weight FLOAT(50) NOT NULL');
+            $this->dbforge->add_field('total FLOAT(50) NOT NULL');
+            $this->dbforge->add_field('status VARCHAR(240) NULL');
+            $this->dbforge->add_field('createdAt DATETIME DEFAULT CURRENT_TIMESTAMP');
+            $this->dbforge->add_field('updateAt DATETIME DEFAULT CURRENT_TIMESTAMP');
+
+        
             
-            $this->dbforge->add_key('id',TRUE);
-            $this->dbforge->add_field($fields);
             $this->dbforge->create_table('product');
 
             return TRUE;
@@ -278,6 +231,21 @@ class Product_Model extends CI_Model{
         $query = $this->db->get();
         return $query->result();
 
+    }
+
+    public function getAll2($criterium){
+        
+        $this->db->select('*');
+        $this->db->from('product');
+        $this->db->or_like('ean',$criterium);
+        $this->db->or_like('item',$criterium);
+        $this->db->or_like('origin',$criterium);
+        $this->db->or_like('type',$criterium);
+        $this->db->or_like('age',$criterium);
+        $this->db->or_like('package',$criterium);
+        $this->db->or_like('plan',$criterium);
+        $query = $this->db->get();
+        return $query->result();
     }
 
     public function getOne($field,$value){
