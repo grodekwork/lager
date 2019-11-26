@@ -56,7 +56,7 @@ class MainController extends CI_Controller{
                 
                 $data['msg'] = "Alle Tabellen müssen installiert sein! App kann nicht richtig funktionieren!";
                 $data['link'] = base_url() . "index.php/makeTables";
-                $data['linkAlt'] = "instal the Tables";
+                $data['linkAlt'] = "install the Tables";
             
                 $this->load->view("templates/warnings/info",$data);
             }

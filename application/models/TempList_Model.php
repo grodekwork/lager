@@ -7,7 +7,7 @@ class TempList_Model extends CI_Model{
     protected $id;
     protected $createdAt;
     protected $info;
-    protected $sourceFile;
+    protected $sourceInfo;
 
     public function __conmstruct(){
 
@@ -37,6 +37,12 @@ class TempList_Model extends CI_Model{
     public function getInfo(){
         return $this->info;
     }
+    public function setSourceFile($value){
+        $this->sourceInfo = $value;
+    }
+    public function getSourceFile(){
+        return $this->sourceInfo;
+    }
 
     public function makeTable(){
 
@@ -50,6 +56,17 @@ class TempList_Model extends CI_Model{
             $this->dbforge->create_table('templist');
             
         }
+    }
+
+    public function save(){
+
+        $data = array(
+            'info' => $this->info,
+            'sourceInfo' => $this->sourceInfo
+        );
+
+        $this->db->insert('templist',$data);
+
     }
 
 

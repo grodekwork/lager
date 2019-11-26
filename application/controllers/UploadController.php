@@ -10,6 +10,7 @@ class UploadController extends CI_Controller{
         $this->load->model('Info','info');
 
         $this->load->model('UploadFile_Model','uploadModel');
+        
 
         //libraries
 
@@ -85,19 +86,61 @@ class UploadController extends CI_Controller{
 
         $file = $this->uploadModel->getOne('id',$id);
 
-        $filePath = base_url() . "uploads/".$file->filename;
+        //-- if file doesn't exists
 
-        $this->uploadModel->setFilename($filePath);
+        if(!$file){
 
-        $data['fileId'] = $file->id;
-
-        $data['productsFromFile'] = $this->uploadModel->readCSV();
+            $data['msg'] = "Datei nicht gefunden!";
+            $data['link'] = base_url() . "index.php/upload/raport";
+            $data['linkAlt'] = "Zurück.";
+            
+        
+            $this->load->view("templates/header",$data);
+            $this->load->view("templates/menu");
+            $this->load->view("templates/warnings/info",$data);
+            $this->load->view("templates/footer");
 
         
-        $this->load->view("templates/header",$data);
-        $this->load->view("templates/menu");
-        $this->load->view('upload/fileSetup');
-        $this->load->view("templates/footer");
+            //else, set the File
+
+        }else{
+
+            $filePath = base_url() . "uploads/".$file->filename;
+
+            $this->uploadModel->setFilename($filePath);
+
+            $data['fileId'] = $file->id;
+
+            //MAKE shIT DONE!
+
+            $data['productsFromFile'] = $this->uploadModel->readCSV();
+
+            if($this->input->post('setIt')){
+
+                $this->load->model('TempList_Model','templist');
+
+                $this->templist->setSourceFile($file->filename);
+
+                $this->templist->setInfo("TEST 1");
+
+                $this->templist->save();
+
+                //echo "<p>".$this->templist->getSourceFile()."</p>";
+
+
+
+            }
+
+            
+            $this->load->view("templates/header",$data);
+            $this->load->view("templates/menu");
+            $this->load->view('upload/fileSetup');
+            $this->load->view("templates/footer");
+
+
+        }
+
+
     }
 
     public function raport(){

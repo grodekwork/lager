@@ -4,6 +4,7 @@
         <p>
             <form action="<?php echo base_url();?>index.php/upload/reload/<?php echo $fileId?>" method="POST">
                 <input type="submit" class="button medium green col_2" name="setIt" value="speichern">
+
             </form>
         </p>
         <table>
