@@ -1,12 +1,19 @@
 <div class="grid flex">
     <div class="col_12">
-        <h3>id:<?php echo $fileId;?></h3>
+        <h3>Sind Sie sicher: </h3>
+        <h4><?php echo $filename . " mit id: " . $fileId;?></h4>
+        <p>
+        zurücksetzen?
+        </p>
         <p>
             <form action="<?php echo base_url();?>index.php/upload/reload/<?php echo $fileId?>" method="POST">
-                <input type="submit" class="button medium green col_2" name="setIt" value="speichern">
+                <input type="submit" class="button medium green col_2" name="setIt" value="Ja">
 
             </form>
         </p>
+
+        <p><strong>File Preview</strong></p>
+        
         <table>
             <thead><tr>
                 <th>PLU / EAN</th>
@@ -71,6 +78,7 @@
             ?>
             </tbody>
         </table>
+        
 
     </div>
 </div>

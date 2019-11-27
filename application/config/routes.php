@@ -86,6 +86,10 @@ $route['upload/raport'] = 'UploadController/raport';
 $route['upload/reload/(:num)'] = 'UploadController/reload/$1';
 $route['upload/deleteFile/(:num)'] = 'UploadController/deleteFile/$1';
 
+//Waiting List - Warteliste
+
+$route['upload/warteliste'] = "UploadController/warteliste";
+
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

@@ -150,8 +150,8 @@ class TempProduct_Model extends CI_Model{
         
         $amount = $this->switcher($this->amount);
         $weight = $this->switcher($this->weight);
-        $total = $amount * $weight;
-
+        //$total = $amount * $weight;
+        $total = 0;
     
         $data = [
             "ean"=>$this->ean,

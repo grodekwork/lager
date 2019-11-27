@@ -8,6 +8,7 @@ class TempList_Model extends CI_Model{
     protected $createdAt;
     protected $info;
     protected $sourceInfo;
+    protected $checkcode;
 
     public function __conmstruct(){
 
@@ -43,6 +44,12 @@ class TempList_Model extends CI_Model{
     public function getSourceFile(){
         return $this->sourceInfo;
     }
+    public function setCheckcode($value){
+        $this->checkcode = $value;
+    }
+    public function getCheckcode(){
+        return $this->checkcode;
+    }
 
     public function makeTable(){
 
@@ -52,7 +59,7 @@ class TempList_Model extends CI_Model{
             $this->dbforge->add_field('createdAt DATETIME DEFAULT CURRENT_TIMESTAMP');
             $this->dbforge->add_field('info VARCHAR(240) NULL');
             $this->dbforge->add_field('sourceInfo VARCHAR(240) NULL');
-
+            $this->dbforge->add_field('checkcode VARCHAR(240) NOT NULL');
             $this->dbforge->create_table('templist');
             
         }
@@ -62,7 +69,8 @@ class TempList_Model extends CI_Model{
 
         $data = array(
             'info' => $this->info,
-            'sourceInfo' => $this->sourceInfo
+            'sourceInfo' => $this->sourceInfo,
+            'checkcode' => $this->checkcode
         );
 
         $this->db->insert('templist',$data);

@@ -110,6 +110,7 @@ class UploadController extends CI_Controller{
             $this->uploadModel->setFilename($filePath);
 
             $data['fileId'] = $file->id;
+            $data['filename'] = $file->filename;
 
             //MAKE shIT DONE!
 
@@ -118,24 +119,54 @@ class UploadController extends CI_Controller{
             if($this->input->post('setIt')){
 
                 $this->load->model('TempList_Model','templist');
+                $this->load->model('TempProduct_Model','tempproduct');
 
                 $this->templist->setSourceFile($file->filename);
 
                 $this->templist->setInfo("TEST 1");
 
+                $code = rand(1000,99999);
+
+                $this->templist->setCheckcode($code);
+
                 $this->templist->save();
 
                 //echo "<p>".$this->templist->getSourceFile()."</p>";
+
+                foreach($data['productsFromFile'] as $file => $value){
+
+                    $this->tempproduct->setEan($value[1]);
+                    $this->tempproduct->setItem($value[2]);
+                    $this->tempproduct->setOrigin($value[3]);
+                    $this->tempproduct->setType($value[4]);
+                    $this->tempproduct->setAge($value[5]);
+                    $this->tempproduct->setPackage($value[6]);
+                    $this->tempproduct->setPlan($value[7]);
+                    $this->tempproduct->setAmount($value[8]);
+                    $this->tempproduct->setWeight($value[9]);
+                    //$this->tempproduct->setTotal($value[10]);
+                    $this->tempproduct->setTempList_id($code);
+
+                    $this->tempproduct->save();
+
+                }
+
+
+                $url = base_url() . "index.php/upload/warteliste";
+
+                redirect($url);
 
 
 
             }
 
+                $this->load->view("templates/header",$data);
+                $this->load->view("templates/menu");
+                $this->load->view('upload/fileSetup');
+                $this->load->view("templates/footer");
+
             
-            $this->load->view("templates/header",$data);
-            $this->load->view("templates/menu");
-            $this->load->view('upload/fileSetup');
-            $this->load->view("templates/footer");
+            
 
 
         }
@@ -199,6 +230,17 @@ class UploadController extends CI_Controller{
         $this->load->view('upload/delete',$data);
         $this->load->view("templates/footer");
 
+    }
+
+    public function warteliste(){
+
+        $data['pageTitle'] = $this->info->getPageTitle() . " - Warteliste";
+
+
+        $this->load->view("templates/header",$data);
+        $this->load->view("templates/menu");
+        $this->load->view('upload/warteliste');
+        $this->load->view("templates/footer");
     }
 
 
