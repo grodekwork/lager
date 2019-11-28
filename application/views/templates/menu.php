@@ -7,6 +7,7 @@
 	<li><a href="<?php echo base_url();?>index.php/produkte/suchen">Suchen</a></li>
 	<li><a href="<?php echo base_url();?>index.php/upload">csv hochladen</a></li>
 	<li><a href="<?php echo base_url();?>index.php/upload/raport">Import</a></li>
+	<li><a href="<?php echo base_url();?>index.php/upload/warteliste">Warteliste</a></li>
 	</ul>
 </li>
 <li><a href=""><span class="icon" data-icon="R"></span>Produktion</a>

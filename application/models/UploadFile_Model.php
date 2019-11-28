@@ -7,6 +7,7 @@ class UploadFile_Model extends CI_Model{
     protected $id;
     protected $filename;
     protected $createdAt;
+    protected $status; //new, added into database, deleted 
 
     public function getId(){
         return $this->id;
@@ -22,6 +23,12 @@ class UploadFile_Model extends CI_Model{
     }
     public function getCreatedAt(){
         return $this->createdAt;
+    }
+    public function setStatus($value){
+        $this->status = $value;
+    }
+    public function getStatus(){
+        return $this->status;
     }
 
     public function __construct(){
@@ -44,7 +51,9 @@ class UploadFile_Model extends CI_Model{
 
             $this->dbforge->add_field('id INT NOT NULL AUTO_INCREMENT PRIMARY KEY');
             $this->dbforge->add_field('filename VARCHAR(240) NOT NULL');
+            $this->dbforge->add_field('status VARCHAR(100) NOT NULL');
             $this->dbforge->add_field('createdAt DATETIME DEFAULT CURRENT_TIMESTAMP');
+            
 
             $this->dbforge->create_table('uploads');
 
@@ -58,10 +67,21 @@ class UploadFile_Model extends CI_Model{
 
     public function save(){
         $data = [
-            'filename' => $this->filename
+            'filename' => $this->filename,
+            'status' => $this->status
         ];
 
         $this->db->insert('uploads',$data);
+
+    }
+    public function update(){
+        
+        $data = [
+            'status' => $this->status
+        ];
+
+        $this->db->where('id', $this->id);
+        $this->db->update('uploads',$data);
 
     }
 
@@ -110,6 +130,7 @@ class UploadFile_Model extends CI_Model{
                     //echo $data[$c] . " ";
                     if($data[$c]!="#NV"){
                         $exportData[$row][$c] = $this->convert($data[$c]);
+                        //$exportData[$row][$c] = $data[$c];
                     }
                     
                 }

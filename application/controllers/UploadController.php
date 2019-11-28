@@ -10,6 +10,8 @@ class UploadController extends CI_Controller{
         $this->load->model('Info','info');
 
         $this->load->model('UploadFile_Model','uploadModel');
+        $this->load->model('TempList_Model','templist');
+        $this->load->model('TempProduct_Model','tempproduct');
         
 
         //libraries
@@ -57,6 +59,8 @@ class UploadController extends CI_Controller{
 
                 $this->uploadModel->setFilename($data['upload_data']['file_name']);
                 
+                $this->uploadModel->setStatus('new');
+
                 //save into database
 
                 $this->uploadModel->save();
@@ -116,10 +120,15 @@ class UploadController extends CI_Controller{
 
             $data['productsFromFile'] = $this->uploadModel->readCSV();
 
-            if($this->input->post('setIt')){
+            //if($this->input->post('setIt')){
 
                 $this->load->model('TempList_Model','templist');
                 $this->load->model('TempProduct_Model','tempproduct');
+
+                //change status of uploaded file
+                $this->uploadModel->setId($file->id);
+                $this->uploadModel->setStatus('added');
+                $this->uploadModel->update();
 
                 $this->templist->setSourceFile($file->filename);
 
@@ -158,7 +167,7 @@ class UploadController extends CI_Controller{
 
 
 
-            }
+           // }
 
                 $this->load->view("templates/header",$data);
                 $this->load->view("templates/menu");
@@ -236,11 +245,29 @@ class UploadController extends CI_Controller{
 
         $data['pageTitle'] = $this->info->getPageTitle() . " - Warteliste";
 
+        $data['wartelisten'] = $this->templist->getAll();
+
 
         $this->load->view("templates/header",$data);
         $this->load->view("templates/menu");
         $this->load->view('upload/warteliste');
         $this->load->view("templates/footer");
+    }
+
+    public function wartelisteDetails($listId){
+
+        $data['pageTitle'] = $this->info->getPageTitle() . " - Warteliste";
+
+        $listId = $this->templist->getOne('id',$listId);
+
+        $data['products'] = $this->tempproduct->getProductsFromList($listId->checkcode);
+        
+        $this->load->view("templates/header",$data);
+        $this->load->view("templates/menu");
+        
+        $this->load->view("templates/footer");
+
+
     }
 
 

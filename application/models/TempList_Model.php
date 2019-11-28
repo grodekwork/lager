@@ -77,5 +77,24 @@ class TempList_Model extends CI_Model{
 
     }
 
+    public function getAll(){
+
+        $this->db->select('*');
+        $this->db->from('templist');
+        $this->db->order_by('createdAt','DESC');
+        $query = $this->db->get();
+        return $query->result();
+
+    }
+
+    public function getOne($field,$value){
+
+        $this->db->select('*');
+        $this->db->from('templist');
+        $this->db->limit(1);
+        $query = $this->db->get();
+        return $query->row();
+    }
+
 
 }

@@ -194,6 +194,16 @@ class TempProduct_Model extends CI_Model{
         $this->db->update('tempproduct', $data);
 
     }
+
+    public function getProductsFromList($checkcode){
+
+        $this->db->select('*');
+        $this->db->from('tempproduct');
+        $this->db->where('tempList_id',$checkcode);
+        $query = $this->db->get();
+        return $query->result();
+
+    }
     public function switcher($value){
 
 

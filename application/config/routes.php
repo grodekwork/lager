@@ -89,6 +89,7 @@ $route['upload/deleteFile/(:num)'] = 'UploadController/deleteFile/$1';
 //Waiting List - Warteliste
 
 $route['upload/warteliste'] = "UploadController/warteliste";
+$route['upload/warteliste/details/(:num)'] = "UploadController/wartelisteDetails/$1";
 
 
 $route['404_override'] = '';
