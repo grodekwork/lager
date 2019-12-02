@@ -204,6 +204,14 @@ class TempProduct_Model extends CI_Model{
         return $query->result();
 
     }
+    public function getOneProduct($field,$value){
+        $this->db->select('*');
+        $this->db->from('tempproduct');
+        $this->db->where($field,$value);
+        $this->db->limit(1);
+        $query = $this->db->get();
+        return $query->row();
+    }
     public function switcher($value){
 
 

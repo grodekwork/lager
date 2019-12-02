@@ -254,19 +254,105 @@ class UploadController extends CI_Controller{
         $this->load->view("templates/footer");
     }
 
-    public function wartelisteDetails($listId){
+    public function wartelisteDetails($id){
 
-        $data['pageTitle'] = $this->info->getPageTitle() . " - Warteliste";
+        $data['pageTitle'] = $this->info->getPageTitle() . " - Warteliste - Produkte";
 
-        $listId = $this->templist->getOne('id',$listId);
+        $listId = $this->templist->getOne('id',$id);
 
         $data['products'] = $this->tempproduct->getProductsFromList($listId->checkcode);
+
+        $data['id'] = $id;
+
+        if($this->input->post('id')){
+            
+            //if a product was a choosen
+            //check if _POST has id
+
+            $this->tempproduct->setId($this->input->post('id'));
+            $this->tempproduct->setEan($this->input->post('ean'));
+            $this->tempproduct->setItem($this->input->post('item'));
+            $this->tempproduct->setOrigin($this->input->post('origin'));
+            $this->tempproduct->setType($this->input->post('type'));
+            $this->tempproduct->setAge($this->input->post('age'));
+            $this->tempproduct->setPackage($this->input->post('package'));
+            $this->tempproduct->setPlan($this->input->post('plan'));
+            $this->tempproduct->setAmount($this->input->post('amount'));    
+            $this->tempproduct->setWeight($this->input->post('weight'));
+
+            $this->tempproduct->update();
+            
+
+        }
         
         $this->load->view("templates/header",$data);
         $this->load->view("templates/menu");
-        
+        $this->load->view("upload/wartelisteProducts",$data);
         $this->load->view("templates/footer");
 
+
+    }
+
+    public function editProduct($id){
+
+    
+        $data['pageTitle'] = $this->info->getPageTitle() . " - Warteliste - Produkte - Edit Mode";
+
+        $data['product'] = $this->tempproduct->getOneProduct("id",$id);
+
+
+        if($data['product']){
+
+            $this->load->view("templates/header",$data);
+            $this->load->view("templates/menu");
+
+
+            if($this->input->post('id')){
+            
+                //if a product was a choosen
+                //check if _POST has id
+    
+                $this->tempproduct->setId($this->input->post('id'));
+                $this->tempproduct->setEan($this->input->post('ean'));
+                $this->tempproduct->setItem($this->input->post('item'));
+                $this->tempproduct->setOrigin($this->input->post('origin'));
+                $this->tempproduct->setType($this->input->post('type'));
+                $this->tempproduct->setAge($this->input->post('age'));
+                $this->tempproduct->setPackage($this->input->post('package'));
+                $this->tempproduct->setPlan($this->input->post('plan'));
+                $this->tempproduct->setAmount($this->input->post('amount'));    
+                $this->tempproduct->setWeight($this->input->post('weight'));
+    
+                $this->tempproduct->update();
+
+                $data['msg'] = "Produkt ist erfolgreich aktualisiert geworden";
+                $data['link'] = base_url() . "index.php/upload/warteliste";
+                $data['linkAlt'] = "zurück";
+
+                $this->load->view("templates/warnings/info",$data);
+    
+            }
+
+            $data['product'] = $this->tempproduct->getOneProduct("id",$id);
+
+            
+            $this->load->view('upload/editProduct',$data);
+            $this->load->view("templates/footer");
+
+        }else{
+            
+            $data['msg'] = "Produkt nicht gefunden";
+            $data['link'] = base_url() . "index.php/upload/warteliste";
+            $data['linkAlt'] = "zurück";
+        
+            
+
+            $this->load->view("templates/header",$data);
+            $this->load->view("templates/menu");
+            $this->load->view("templates/warnings/info",$data);
+            $this->load->view("templates/footer");
+
+        }
 
     }
 

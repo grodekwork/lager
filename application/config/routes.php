@@ -90,6 +90,7 @@ $route['upload/deleteFile/(:num)'] = 'UploadController/deleteFile/$1';
 
 $route['upload/warteliste'] = "UploadController/warteliste";
 $route['upload/warteliste/details/(:num)'] = "UploadController/wartelisteDetails/$1";
+$route['upload/warteliste/details/editProduct/(:num)'] = "UploadController/editProduct/$1";
 
 
 $route['404_override'] = '';
