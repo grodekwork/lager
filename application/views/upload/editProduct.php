@@ -86,7 +86,8 @@
                 <input class="col_6" type="text" name="weight" value="<?php echo $product->weight; ?>"required>
             </div>
             <div class="col_12">
-                <input type="submit" name="updateProduct" class="col_12" value="Aktualisieren">
+                <input type="submit" name="updateProduct" class="button green" value="Aktualisieren">
+                <a href="<?php echo base_url();?>index.php/upload/warteliste/details/deleteProduct/<?php echo $product->id; ?>" class="button red">Entfernen</a>
             </div>
             
             </form>

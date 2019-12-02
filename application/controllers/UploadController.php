@@ -132,7 +132,7 @@ class UploadController extends CI_Controller{
 
                 $this->templist->setSourceFile($file->filename);
 
-                $this->templist->setInfo("TEST 1");
+                $this->templist->setInfo("upload");
 
                 $code = rand(1000,99999);
 
@@ -354,6 +354,61 @@ class UploadController extends CI_Controller{
 
         }
 
+    }
+
+
+    public function deleteTempProduct($tempProductId){
+
+        if($this->input->post("deleteTempProduct")){
+
+            $this->tempproduct->setId($this->input->post('tempProductId'));
+            $this->tempproduct->delete();
+            $url = base_url() . "index.php/upload/warteliste";
+            redirect($url);
+
+        }
+
+
+        //set a page title
+            $data['pageTitle'] = $this->info->getPageTitle() . " - Warteliste - Produkte - Delete Mode";
+
+        //find a product from tempproducts by id
+
+            $data['tempProduct'] = $this->tempproduct->getOneProduct('id',$tempProductId);
+
+        //set first templates header and menu
+
+            $this->load->view("templates/header",$data);
+            $this->load->view("templates/menu");
+
+        //if product not found set a warning massage
+
+            if(!$data['tempProduct']){
+
+                $data['msg'] = "Produkt nicht gefunden";
+                $data['link'] = base_url() . "index.php/upload/warteliste";
+                $data['linkAlt'] = "zurück";
+
+                $this->load->view("templates/warnings/info",$data);
+        
+        //else set a deleting confirm form
+
+            }else{
+
+
+                $data['msg'] = "Sind Sie sicher? Möchten Sie <strong>".$data['tempProduct']->item."</strong> entfernen?";
+                
+
+                $this->load->view('upload/deleteTempProduct',$data);
+
+                
+            }
+        
+            
+        
+            
+            
+            $this->load->view("templates/footer");
     }
 
 

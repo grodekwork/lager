@@ -85,6 +85,7 @@ $route['upload/do_upload'] = 'UploadController/main';
 $route['upload/raport'] = 'UploadController/raport';
 $route['upload/reload/(:num)'] = 'UploadController/reload/$1';
 $route['upload/deleteFile/(:num)'] = 'UploadController/deleteFile/$1';
+$route['upload/warteliste/details/deleteProduct/(:num)'] = 'UploadController/deleteTempProduct/$1';
 
 //Waiting List - Warteliste
 

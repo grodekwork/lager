@@ -195,6 +195,11 @@ class TempProduct_Model extends CI_Model{
 
     }
 
+    public function delete(){
+        $this->db->where('id',$this->id);
+        $this->db->delete('tempproduct');
+    }
+
     public function getProductsFromList($checkcode){
 
         $this->db->select('*');
