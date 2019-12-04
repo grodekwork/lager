@@ -134,7 +134,7 @@ class UploadController extends CI_Controller{
 
                 $this->templist->setInfo("upload");
 
-                $code = rand(1000,99999);
+                $code = "U" . rand(1000,99999);
 
                 $this->templist->setCheckcode($code);
 
@@ -260,36 +260,62 @@ class UploadController extends CI_Controller{
 
         $listId = $this->templist->getOne('id',$id);
 
-        $data['products'] = $this->tempproduct->getProductsFromList($listId->checkcode);
+        //if list doesn't exists
 
-        $data['id'] = $id;
+        if(!$listId){
 
-        if($this->input->post('id')){
             
-            //if a product was a choosen
-            //check if _POST has id
+            $data['msg'] = "Die Warteliste nicht gefunden";
+            $data['link'] = base_url();
+            $data['linkAlt'] = "zurück";
 
-            $this->tempproduct->setId($this->input->post('id'));
-            $this->tempproduct->setEan($this->input->post('ean'));
-            $this->tempproduct->setItem($this->input->post('item'));
-            $this->tempproduct->setOrigin($this->input->post('origin'));
-            $this->tempproduct->setType($this->input->post('type'));
-            $this->tempproduct->setAge($this->input->post('age'));
-            $this->tempproduct->setPackage($this->input->post('package'));
-            $this->tempproduct->setPlan($this->input->post('plan'));
-            $this->tempproduct->setAmount($this->input->post('amount'));    
-            $this->tempproduct->setWeight($this->input->post('weight'));
+                
 
-            $this->tempproduct->update();
+            $this->load->view("templates/header",$data);
+            $this->load->view("templates/menu");
+            $this->load->view("templates/warnings/info",$data);
+            $this->load->view("templates/footer");
+
+        
+        
+        }else{
+
+
+            $data['products'] = $this->tempproduct->getProductsFromList($listId->checkcode);
+
+            $data['id'] = $id;
+
+        
+
+            if($this->input->post('id')){
+                
+                //if a product was a choosen
+                //check if _POST has id
+
+                $this->tempproduct->setId($this->input->post('id'));
+                $this->tempproduct->setEan($this->input->post('ean'));
+                $this->tempproduct->setItem($this->input->post('item'));
+                $this->tempproduct->setOrigin($this->input->post('origin'));
+                $this->tempproduct->setType($this->input->post('type'));
+                $this->tempproduct->setAge($this->input->post('age'));
+                $this->tempproduct->setPackage($this->input->post('package'));
+                $this->tempproduct->setPlan($this->input->post('plan'));
+                $this->tempproduct->setAmount($this->input->post('amount'));    
+                $this->tempproduct->setWeight($this->input->post('weight'));
+
+                $this->tempproduct->update();
+                
+
+            }
             
+            $this->load->view("templates/header",$data);
+            $this->load->view("templates/menu");
+            $this->load->view("upload/wartelisteProducts",$data);
+            $this->load->view("templates/footer");
+
+
 
         }
-        
-        $this->load->view("templates/header",$data);
-        $this->load->view("templates/menu");
-        $this->load->view("upload/wartelisteProducts",$data);
-        $this->load->view("templates/footer");
-
 
     }
 

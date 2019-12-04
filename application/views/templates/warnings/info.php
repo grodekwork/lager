@@ -5,7 +5,7 @@
         <i class="icon-warning-sign icon-large"></i> 
         <?php echo $msg;?>
         <p>
-            <a href="<?php echo $link; ?>">Click here</a>
+            <a href="<?php echo $link; ?>"><?php echo $linkAlt; ?></a>
         </p>
     </div>
 </div>

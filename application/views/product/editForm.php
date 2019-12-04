@@ -23,43 +23,43 @@
 		<label class="col_2" for="origin">Ursprung</label>
 		<select class="col_6" name="origin" id="select1">
 
-			<option value="Kuh" <?php if($product->origin=='Kuh') echo "selected"; ?>>Kuh</option>
-			<option value="Ziege" <?php if($product->origin=='Ziege') echo "selected"; ?>>Ziege</option>
-			<option value="Schaf" <?php if($product->origin=='Schaf') echo "selected";?>>Schaf</option>
+			<option value="K" <?php if($product->origin=='K') echo "selected"; ?>>Kuh</option>
+			<option value="Z" <?php if($product->origin=='Z') echo "selected"; ?>>Ziege</option>
+			<option value="Sc" <?php if($product->origin=='Sc') echo "selected";?>>Schaf</option>
 
 		</select>
 	</div>
 	<div class="col_12">
 		<label class="col_2" for="type">Art</label>
 		<select class="col_6" name="type" id="select1">
-			<option value="Frisch" <?php if($product->type=='Frisch') echo "selected"; ?>>Frisch</option>
-			<option value="Weich" <?php if($product->type=='Weich') echo "selected"; ?>>Weich</option>
-			<option value="Schnitt" <?php if($product->type=='Schnitt') echo "selected"; ?>>Schnitt</option>
-			<option value="Hart" <?php if($product->type=='Hart') echo "selected"; ?>>Hart</option>
+			<option value="F" <?php if($product->type=='F') echo "selected"; ?>>Frisch</option>
+			<option value="W" <?php if($product->type=='W') echo "selected"; ?>>Weich</option>
+			<option value="S" <?php if($product->type=='S') echo "selected"; ?>>Schnitt</option>
+			<option value="H" <?php if($product->type=='H') echo "selected"; ?>>Hart</option>
 		</select>
 	</div>
 	<div class="col_12">
 		<label class="col_2" for="age">Alter</label>
 		<select class="col_6" name="age">
-			<option value="In Reife" <?php if($product->age=='In Reife') echo "selected"; ?>>In Reife</option>
-			<option value="Jung" <?php if($product->age=='Jung') echo "selected"; ?>>Jung</option>
-			<option value="Mittel" <?php if($product->age=='Mittel') echo "selected"; ?>>Mittel</option>
-			<option value="Alt" <?php if($product->age=='Alt') echo "selected"; ?>>Alt</option>
+			<option value="I" <?php if($product->age=='I') echo "selected"; ?>>In Reife</option>
+			<option value="J" <?php if($product->age=='J') echo "selected"; ?>>Jung</option>
+			<option value="M" <?php if($product->age=='M') echo "selected"; ?>>Mittel</option>
+			<option value="A" <?php if($product->age=='A') echo "selected"; ?>>Alt</option>
 		</select>
 	</div>
 	<div class="col_12">
 		<label class="col_2" for="package">Packung</label>
 		<select class="col_6" name="package">
-			<option value="Laibgross" <?php if($product->package=='Laibgross') echo "selected"; ?>>Laibgross</option>
-			<option value="Laibklein" <?php if($product->package=='Laibklein') echo "selected"; ?>>Laibklein</option>
-			<option value="Glas" <?php if($product->package=='Glas') echo "selected"; ?>>Glas</option>
+			<option value="LG" <?php if($product->package=='LG') echo "selected"; ?>>Laibgross</option>
+			<option value="LK" <?php if($product->package=='LK') echo "selected"; ?>>Laibklein</option>
+			<option value="G" <?php if($product->package=='G') echo "selected"; ?>>Glas</option>
 		</select>
 	</div>
 	<div class="col_12">
 		<label class="col_2" for="plan">Planung</label>
 		<select class="col_6" name="plan">
-			<option value="Aktuell" <?php if($product->plan=='Aktuell') echo "selected"; ?>>Aktuell</option>
-			<option value="Nicht mehr produziert" <?php if($product->plan=='Nicht mehr produziert') echo "selected"; ?>>Nicht mehr produziert</option>
+			<option value="A" <?php if($product->plan=='A') echo "selected"; ?>>Aktuell</option>
+			<option value="NP" <?php if($product->plan=='NP') echo "selected"; ?>>Nicht mehr produziert</option>
 		</select>
 	</div>
 	<div class="col_12">

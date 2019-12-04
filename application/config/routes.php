@@ -93,6 +93,11 @@ $route['upload/warteliste'] = "UploadController/warteliste";
 $route['upload/warteliste/details/(:num)'] = "UploadController/wartelisteDetails/$1";
 $route['upload/warteliste/details/editProduct/(:num)'] = "UploadController/editProduct/$1";
 
+//Backup
+
+$route['backup/reloadtables'] = "BackupController/reloadTables";
+$route['backup/updatetables'] = "BackupController/updateTableProducts";
+
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

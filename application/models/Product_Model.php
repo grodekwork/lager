@@ -186,6 +186,10 @@ class Product_Model extends CI_Model{
 
     }
 
+    public function deleteAll(){
+        $this->db->empty_table('product');
+    }
+
     public function updateFromProduction(){
 
         

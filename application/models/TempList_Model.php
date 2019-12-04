@@ -91,6 +91,7 @@ class TempList_Model extends CI_Model{
 
         $this->db->select('*');
         $this->db->from('templist');
+        $this->db->where($field,$value);
         $this->db->limit(1);
         $query = $this->db->get();
         return $query->row();
