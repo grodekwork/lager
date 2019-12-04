@@ -23,7 +23,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/lager/';
+
+$url = 'http://localhost/lager/';
+
+//$url = 'http://172.20.12.191/lager/';
+
+$config['base_url'] = $url;
 
 /*
 |--------------------------------------------------------------------------

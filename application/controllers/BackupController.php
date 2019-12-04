@@ -17,6 +17,10 @@ class BackupController extends CI_Controller{
 
         $this->load->helper('url');
 
+        //libraries
+
+        $this->load->library("session");
+
         if(!$this->session->userdata('isLogged')){
             redirect(base_url());
         }
@@ -29,6 +33,43 @@ class BackupController extends CI_Controller{
     public function backup(){
 
 
+        //make new waiting list
+
+        $this->templist->setInfo('Backup');
+        $this->templist->setSourceFile('--');
+
+        $code = "B".rand(1000,99999);
+
+        $this->templist->setCheckcode($code);
+
+        $this->templist->save();
+
+        // save all products from main table into waiting list
+        // with ckeckcode $code
+
+        $products = $this->product->getAll();
+
+        foreach($products as $product){
+
+            $this->tempproduct->setEan($product->ean);
+            $this->tempproduct->setItem($product->item);
+            $this->tempproduct->setOrigin($product->origin);
+            $this->tempproduct->setType($product->type);
+            $this->tempproduct->setAge($product->age);
+            $this->tempproduct->setPackage($product->package);
+            $this->tempproduct->setPlan($product->plan);
+            $this->tempproduct->setAmount($product->amount);
+            $this->tempproduct->setWeight($product->weight);
+            $this->tempproduct->setTotal($product->total);
+            $this->tempproduct->setTempList_id($code);
+
+            $this->tempproduct->save();
+
+
+
+        }
+
+
 
     }
 
@@ -38,10 +79,16 @@ class BackupController extends CI_Controller{
 
         if($this->input->post('reloadTablesBtn')){
 
-            //make first backup
+            //make first for all backup
 
             //make new waiting list
 
+            $this->backup();
+
+
+
+
+            /*            
             $this->templist->setInfo('Backup');
             $this->templist->setSourceFile('--');
 
@@ -75,7 +122,7 @@ class BackupController extends CI_Controller{
 
 
             }
-
+            */
 
             //delete all products from main table
 
@@ -173,6 +220,12 @@ class BackupController extends CI_Controller{
 
             $howManyUpdated = 0;
             $howManyAdded = 0;
+
+            //make a backup
+
+            $this->backup();
+
+            
 
             foreach($tempProducts as $tempproduct){
 
